@@ -14,6 +14,12 @@ public class HomePage {
 
     @FindBy (xpath = "//*[@id=\"select2-drop\"]/div/input")
     private WebElement searchCityInput;
+    //Find checkin date
+    @FindBy (name = "checkin")
+    private WebElement checkIn;
+    //find checkout date
+    @FindBy (name = "checkout")
+    private  WebElement checkOut;
 
     //Constructor for class HomePage
     public HomePage(WebDriver driver) {
@@ -21,11 +27,20 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void sendKeysToCityInput(String cityName) throws InterruptedException {
+    public void setCityName(String cityName) throws InterruptedException {
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
-        Thread.sleep(6000);
+        Thread.sleep(4000);
         searchCityInput.sendKeys(Keys.ENTER);
+    }
+
+    public void setDateRange(String checkInDate, String checkOutDate){
+        //checkIn.click();
+        checkIn.sendKeys(checkInDate);
+        //checkOut.click();
+        checkOut.sendKeys(checkOutDate);
+        checkOut.click();
+
     }
 
 }

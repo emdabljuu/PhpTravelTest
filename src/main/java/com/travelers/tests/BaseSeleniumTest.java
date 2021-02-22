@@ -29,7 +29,7 @@ public abstract class BaseSeleniumTest {
         //Message in part AfterClass
         System.out.println("After class");
         //Browser close down
-        //driver.quit();
+        driver.quit();
     }
 
 }
