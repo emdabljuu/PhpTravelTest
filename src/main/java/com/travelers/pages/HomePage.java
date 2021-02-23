@@ -1,5 +1,6 @@
 package com.travelers.pages;
 
+import com.travelers.helpers.SeleniumHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //Class contains HomePage's Web Elements
 public class HomePage {
@@ -39,16 +42,20 @@ public class HomePage {
     @FindBy (xpath = "//table[@class='bgwhite table table-striped']")
     private WebElement resultsTable;
 
+    private SeleniumHelper helper;
+
     //Constructor for class HomePage
     public HomePage(WebDriver driver) {
         //Class initialization
         PageFactory.initElements(driver, this);
+        this.helper = new SeleniumHelper(driver);
     }
 
-    public void setCityName(String cityName) throws InterruptedException {
+    public void setCityName(String cityName) {
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
-        Thread.sleep(4000);
+        By locationlabel = By.xpath("//div[@class = 'select2-result-label']");
+        helper.waitForElementToBeDisplayed(locationlabel);
         searchCityInput.sendKeys(Keys.ENTER);
     }
 
@@ -76,18 +83,22 @@ public class HomePage {
     }
 
     //Public class, analyze table with results
-    public void getHotelNames(){
-        List<WebElement> hotelNames = resultsTable.findElements(By.xpath("//h4//b"));
-        for(WebElement hotelName: hotelNames) {
-                System.out.println(hotelName.getText());
-            }
+    public List<String> getHotelNames(){
+        List<String> hotelNames = new ArrayList<>();
+        List<WebElement> hotelNameWebElements = resultsTable.findElements(By.xpath("//h4//b"));
+        for(WebElement hotelNameWebElement: hotelNameWebElements) {
+            System.out.println(hotelNameWebElement.getText());
+            hotelNames.add(hotelNameWebElement.getText());
         }
+        return hotelNames;
+    }
 
     //Public class, get Hotel Prices
-    public void getHotelPrices() {
+    public List<String> getHotelPrices() {
         List<WebElement> hotelPrices = resultsTable.findElements(By.xpath("//div[contains(@class,'price_tab')]//b"));
-        hotelPrices.stream().forEach(hotelPrice ->
-                System.out.println(hotelPrice.getText()));
+        List<String> prices = hotelPrices.stream().map(element -> element.getText()).collect(Collectors.toList());
+        System.out.println(prices);
+        return prices;
     }
 }
 

@@ -1,8 +1,10 @@
 package com.travelers.tests;
 
 import com.travelers.pages.HomePage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -29,10 +31,18 @@ public class SearchHotelTest extends BaseSeleniumTest{
         homePage.startSearch();
         //Get hotel Names
         Thread.sleep(4000);
-        homePage.getHotelNames();
+        List<String> hotelNames = homePage.getHotelNames();
+        Assert.assertEquals(hotelNames.get(0), "Jumeirah Beach Hotel");
+        Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
+        Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
+        Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
         Thread.sleep(4000);
         //Get hotels prices
-        homePage.getHotelPrices();
+        List<String> prices = homePage.getHotelPrices();
+        Assert.assertEquals(prices.get(0), "$22");
+        Assert.assertEquals(prices.get(1), "$50");
+        Assert.assertEquals(prices.get(2), "$80");
+        Assert.assertEquals(prices.get(3), "$150");
 
     }
 }
