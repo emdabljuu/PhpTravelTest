@@ -1,6 +1,7 @@
 package com.travelers.tests;
 
 import com.travelers.pages.HomePage;
+import com.travelers.pages.ResultPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,14 +32,16 @@ public class SearchHotelTest extends BaseSeleniumTest{
         homePage.startSearch();
         //Get hotel Names
         Thread.sleep(4000);
-        List<String> hotelNames = homePage.getHotelNames();
+        ResultPage resultPage = new ResultPage(driver);
+
+        List<String> hotelNames = resultPage.getHotelNames();
         Assert.assertEquals(hotelNames.get(0), "Jumeirah Beach Hotel");
         Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
         Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
         Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
         Thread.sleep(4000);
         //Get hotels prices
-        List<String> prices = homePage.getHotelPrices();
+        List<String> prices = resultPage.getHotelPrices();
         Assert.assertEquals(prices.get(0), "$22");
         Assert.assertEquals(prices.get(1), "$50");
         Assert.assertEquals(prices.get(2), "$80");
