@@ -1,18 +1,21 @@
 package com.travelers.tests;
 
+import com.travelers.helpers.TestListener;
 import com.travelers.pages.HomePage;
 import com.travelers.pages.ResultPage;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
+@Listeners(TestListener.class)
 public class SearchHotelTest extends BaseSeleniumTest{
     //Main Test
     @Test
-    public void searchHotelTest() throws InterruptedException {
+    public void searchHotelTest() throws InterruptedException, IOException {
         //Wait for website
         driver.manage().timeouts().implicitlyWait(15L, TimeUnit.SECONDS);
         //Getting correct website address
@@ -35,6 +38,7 @@ public class SearchHotelTest extends BaseSeleniumTest{
         ResultPage resultPage = new ResultPage(driver);
 
         List<String> hotelNames = resultPage.getHotelNames();
+        //SeleniumHelper.takeScreenshot(driver);
         Assert.assertEquals(hotelNames.get(0), "Jumeirah Beach Hotel");
         Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
         Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
