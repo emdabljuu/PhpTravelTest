@@ -12,8 +12,8 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         try {
             System.out.println("On test failure");
-            SeleniumHelper.takeScreenshot(DriverFactory.getDriver(DriverType.FIREFOX));
-        } catch (IOException e) {
+            SeleniumHelper.takeScreenshot(DriverFactory.getDriver(DriverType.CHROME));
+        } catch (IOException | NoSuchDriverException e) {
             e.printStackTrace();
         }
     }

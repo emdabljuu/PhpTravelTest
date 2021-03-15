@@ -4,20 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.GeckoDriverInfo;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.Driver;
 
 public class DriverFactory {
 
     private static WebDriver driverInstance;
-
-    public static WebDriver getDriver(DriverType driverType) throws IOException {
+    public static WebDriver getDriver(DriverType driverType) throws NoSuchDriverException {
         if(driverInstance == null) {
             getSpecificDriver(driverType);
             driverInstance.manage().window().maximize();
@@ -25,7 +21,7 @@ public class DriverFactory {
         return driverInstance;
     }
 
-    public static void getSpecificDriver(DriverType driverType) throws IOException {
+    private static void getSpecificDriver(DriverType driverType) throws NoSuchDriverException {
 
         switch (driverType) {
             case IE:
@@ -54,6 +50,7 @@ public class DriverFactory {
 
             default:
                 System.out.println("Brak drivera danego typu");
+                throw new NoSuchDriverException();
         }
     }
 }

@@ -3,12 +3,10 @@ package com.travelers.tests;
 //imports
 import com.travelers.helpers.DriverFactory;
 import com.travelers.helpers.DriverType;
+import com.travelers.helpers.NoSuchDriverException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-
-import java.io.IOException;
 
 public abstract class BaseSeleniumTest {
 
@@ -17,21 +15,18 @@ public abstract class BaseSeleniumTest {
 
     //Methods before main class @test
     @BeforeClass
-    public void SetUp() throws IOException {
+    public void SetUp() throws NoSuchDriverException {
         System.out.println("Before class");
-        //Loading driver path from resources
-        String driverPath = "src/main/resources/executables.driver/chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        //Creating new object
-        driver = DriverFactory.getDriver(DriverType.FIREFOX);
+        driver = DriverFactory.getDriver(DriverType.CHROME);
     }
     //Methods after main class @test
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown(){
         //Message in part AfterClass
         System.out.println("After class");
         //Browser close down
         driver.quit();
+        driver = null;
     }
 
 }
