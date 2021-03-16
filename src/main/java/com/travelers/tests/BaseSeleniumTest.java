@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.io.IOException;
+
 public abstract class BaseSeleniumTest {
 
     //range validation
@@ -15,7 +17,7 @@ public abstract class BaseSeleniumTest {
 
     //Methods before main class @test
     @BeforeClass
-    public void SetUp() throws NoSuchDriverException {
+    public void SetUp() throws NoSuchDriverException, IOException {
         System.out.println("Before class");
         driver = DriverFactory.getDriver(DriverType.CHROME);
     }

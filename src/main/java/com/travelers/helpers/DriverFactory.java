@@ -9,11 +9,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 
 import java.io.File;
+import java.io.IOException;
 
 public class DriverFactory {
 
     private static WebDriver driverInstance;
-    public static WebDriver getDriver(DriverType driverType) throws NoSuchDriverException {
+    public static WebDriver getDriver(DriverType driverType) throws NoSuchDriverException, IOException {
         if(driverInstance == null) {
             getSpecificDriver(driverType);
             driverInstance.manage().window().maximize();
@@ -21,7 +22,7 @@ public class DriverFactory {
         return driverInstance;
     }
 
-    private static void getSpecificDriver(DriverType driverType) throws NoSuchDriverException {
+    private static void getSpecificDriver(DriverType driverType) throws NoSuchDriverException, IOException {
 
         switch (driverType) {
             case IE:
@@ -33,7 +34,7 @@ public class DriverFactory {
             break;
 
             case CHROME:
-                File chromeExe = new File("src/main/resources/executables.driver/chromedriver.exe");
+                File chromeExe = new File("src/main/resources/executables.driver/chromedriver1.exe");
                 ChromeDriverService chromeService = new ChromeDriverService.Builder()
                         .usingDriverExecutable(chromeExe)
                         .usingAnyFreePort().build();

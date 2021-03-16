@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static com.travelers.helpers.ExcelHelper.readExcelFile;
 
@@ -19,9 +18,7 @@ import static com.travelers.helpers.ExcelHelper.readExcelFile;
 public class SearchHotelTest extends BaseSeleniumTest{
     //Main Test
     @Test(dataProvider = "getData")
-    public void searchHotelTest(String city, String checkInDate, String checkOutDate, String fHotel, String fPrice,
-                                String sHotel, String sPrice, String tHotel, String tPrice)
-                                throws InterruptedException, IOException {
+    public void searchHotelTest(String city, String checkInDate, String checkOutDate, String fHotel, String fPrice, String sHotel, String sPrice, String tHotel, String tPrice) throws InterruptedException{
         //Wait for website
         //driver.manage().timeouts().implicitlyWait(15L, TimeUnit.SECONDS);
         //Getting correct website address
@@ -62,11 +59,7 @@ public class SearchHotelTest extends BaseSeleniumTest{
     @DataProvider
     public Object[][] getData() throws IOException {
         Object[][] data = null;
-        try {
             data = readExcelFile(new File("src/main/resources/Dane.xlsx"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return data;
     }
 }

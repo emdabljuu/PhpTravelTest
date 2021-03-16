@@ -1,5 +1,6 @@
 package com.travelers.helpers;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,7 +22,7 @@ public class ExcelHelper {
         Sheet sheet = workbook.getSheetAt(0);
         int rowNumbers = sheet.getLastRowNum();
         int colNumbers = sheet.getRow(0).getLastCellNum();
-        String[][] data = new String[rowNumbers][colNumbers];
+        String[][] data = new String[rowNumbers][9];
 
         for(int i=0; i < rowNumbers; i++) {
             Row row = sheet.getRow(i+1);
@@ -49,11 +50,12 @@ public class ExcelHelper {
         }*/
     }
 //      Sprawdzenie czy dane są odczytywane poprawnie
-/*
-    public static void main(String[] args) throws IOException {
+
+    /*public static void main(String[] args) throws IOException {
         Object[][] data = readExcelFile(new File("src/main/resources/Dane.xlsx"));
-        System.out.println(data[0][8]);
-    }
-*/
+        System.out.println(data[0][9]);
+        System.out.println();
+    }*/
+
 
 }
