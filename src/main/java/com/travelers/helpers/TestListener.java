@@ -1,7 +1,6 @@
 package com.travelers.helpers;
 
-import com.travelers.helpers.DriverFactory;
-import com.travelers.helpers.SeleniumHelper;
+import com.travelers.utils.DriverFactory;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 

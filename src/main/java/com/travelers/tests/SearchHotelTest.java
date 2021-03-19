@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.travelers.helpers.ExcelHelper.readExcelFile;
 
@@ -20,7 +21,7 @@ public class SearchHotelTest extends BaseSeleniumTest{
     @Test(dataProvider = "getData")
     public void searchHotelTest(String city, String checkInDate, String checkOutDate, String fHotel, String fPrice, String sHotel, String sPrice, String tHotel, String tPrice) throws InterruptedException{
         //Wait for website
-        //driver.manage().timeouts().implicitlyWait(15L, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15L, TimeUnit.SECONDS);
         //Getting correct website address
         String website = "http://www.kurs-selenium.pl/demo/";
         //Hand website name over to driver

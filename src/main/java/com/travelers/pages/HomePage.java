@@ -54,10 +54,18 @@ public class HomePage {
     public void setCityName(String cityName) {
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
-        By locationlabel = By.xpath("//div[@class = 'select2-result-label']");
+        By locationlabel = By.className("select2-result-label");
         helper.waitForElementToBeDisplayed(locationlabel);
         searchCityInput.sendKeys(Keys.ENTER);
     }
+//    public void setCityName(String cityName) {
+//        searchSpan.click();
+//        searchCityInput.sendKeys(cityName);
+//        By locationlabel = By.xpath("//div[@class = 'select2-result-label']");
+//        helper.waitForElementToBeDisplayed(locationlabel);
+//        searchCityInput.sendKeys(Keys.ENTER);
+//    }
+
 
     public void setDateRange(String checkInDate, String checkOutDate){
         //checkIn.click();

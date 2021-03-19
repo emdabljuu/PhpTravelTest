@@ -1,5 +1,7 @@
-package com.travelers.helpers;
+package com.travelers.utils;
 
+import com.travelers.helpers.DriverType;
+import com.travelers.helpers.NoSuchDriverException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -53,5 +55,9 @@ public class DriverFactory {
                 System.out.println("Brak drivera danego typu");
                 throw new NoSuchDriverException();
         }
+    }
+
+    public static void resetDriver() {
+        driverInstance = null;
     }
 }
