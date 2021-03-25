@@ -1,6 +1,8 @@
 package com.travelers.pages;
 
 import com.travelers.helpers.SeleniumHelper;
+import org.apache.log4j.Logger;
+import org.mortbay.log.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,8 @@ public class ResultPage {
 
     private SeleniumHelper helper;
 
+    private Logger log = Logger.getLogger(ResultPage.class);
+
     public ResultPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         helper = new SeleniumHelper(driver);
@@ -24,6 +28,7 @@ public class ResultPage {
 
     //Public class, analyze table with results
     public List<String> getHotelNames(){
+        log.info("Checking hotel names");
         List<String> hotelNames = new ArrayList<>();
         List<WebElement> hotelNameWebElements = resultsTable.findElements(By.xpath("//h4//b"));
         for(WebElement hotelNameWebElement: hotelNameWebElements) {
@@ -35,6 +40,7 @@ public class ResultPage {
 
     //Public class, get Hotel Prices
     public List<String> getHotelPrices() {
+        log.info("Checking hotel prices");
         List<WebElement> hotelPrices = resultsTable.findElements(By.xpath("//div[contains(@class,'price_tab')]//b"));
         List<String> prices = hotelPrices.stream().map(element -> element.getText()).collect(Collectors.toList());
         System.out.println(prices);

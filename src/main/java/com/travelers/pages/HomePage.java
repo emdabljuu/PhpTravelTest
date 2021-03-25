@@ -1,6 +1,7 @@
 package com.travelers.pages;
 
 import com.travelers.helpers.SeleniumHelper;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -44,6 +45,8 @@ public class HomePage {
 
     private SeleniumHelper helper;
 
+    private Logger log = Logger.getLogger(HomePage.class);
+
     //Constructor for class HomePage
     public HomePage(WebDriver driver) {
         //Class initialization
@@ -52,11 +55,13 @@ public class HomePage {
     }
 
     public void setCityName(String cityName) {
+        log.info(("Input city"));
         searchSpan.click();
         searchCityInput.sendKeys(cityName);
         By locationlabel = By.className("select2-result-label");
         helper.waitForElementToBeDisplayed(locationlabel);
         searchCityInput.sendKeys(Keys.ENTER);
+        log.info("City name set");
     }
 //    public void setCityName(String cityName) {
 //        searchSpan.click();
@@ -69,24 +74,30 @@ public class HomePage {
 
     public void setDateRange(String checkInDate, String checkOutDate){
         //checkIn.click();
+        log.info("Setting date range");
         checkIn.sendKeys(checkInDate);
         //checkOut.click();
         checkOut.sendKeys(checkOutDate);
-
+        log.info("Date range is set");
     }
     //Public class, set number of travellers by sendKeys
     public void setTravellersInput(String adults, String child){
+        log.info("Set field adults");
         travellersInput.click();
         //Clear default values and set adults number
         adultsNumber.clear();
         adultsNumber.sendKeys(adults);
+        log.info("Adults have been added");
         //Clear default values and set child number
+        log.info("Set field children");
         childNumber.clear();
         childNumber.sendKeys(child);
+        log.info("Children have been added");
     }
 
     //Public class, start searching
     public void startSearch(){
+        log.info("Start searching");
         searchButton.click();
     }
 

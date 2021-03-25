@@ -1,5 +1,9 @@
 package com.travelers.tests;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.MediaEntityModelProvider;
+import com.travelers.helpers.SeleniumHelper;
 import com.travelers.helpers.TestListener;
 import com.travelers.pages.HomePage;
 import com.travelers.pages.ResultPage;
@@ -19,7 +23,8 @@ import static com.travelers.helpers.ExcelHelper.readExcelFile;
 public class SearchHotelTest extends BaseSeleniumTest{
     //Main Test
     @Test(dataProvider = "getData")
-    public void searchHotelTest(String city, String checkInDate, String checkOutDate, String fHotel, String fPrice, String sHotel, String sPrice, String tHotel, String tPrice) throws InterruptedException{
+    public void searchHotelTest(String city, String checkInDate, String checkOutDate, String fHotel, String fPrice, String sHotel, String sPrice, String tHotel, String tPrice) throws InterruptedException, IOException {
+        ExtentTest test = reports.createTest("Search Hotel Test");
         //Wait for website
         driver.manage().timeouts().implicitlyWait(15L, TimeUnit.SECONDS);
         //Getting correct website address
@@ -28,6 +33,8 @@ public class SearchHotelTest extends BaseSeleniumTest{
         driver.get(website);
         //Create new HomePage object
         HomePage homePage = new HomePage(driver);
+
+        test.info("On PHPTravels Home Page", getScreenshot());
         //Methods execution on homePage
         //Add cityName to constructor
         homePage.setCityName(city);
@@ -37,10 +44,12 @@ public class SearchHotelTest extends BaseSeleniumTest{
         homePage.setTravellersInput("6","3");
         //Start searching
         homePage.startSearch();
+        test.info("After performing search", getScreenshot());
         //Get hotel Names
         Thread.sleep(4000);
         ResultPage resultPage = new ResultPage(driver);
 
+        test.info("Checking hotel names", getScreenshot());
         List<String> hotelNames = resultPage.getHotelNames();
         //SeleniumHelper.takeScreenshot(driver);
         Assert.assertEquals(hotelNames.get(0), fHotel);
@@ -48,6 +57,8 @@ public class SearchHotelTest extends BaseSeleniumTest{
         Assert.assertEquals(hotelNames.get(2), tHotel);
         Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
         Thread.sleep(4000);
+
+        test.info("Checking hotel prices", getScreenshot());
         //Get hotels prices
         List<String> prices = resultPage.getHotelPrices();
         Assert.assertEquals(prices.get(0), fPrice);
