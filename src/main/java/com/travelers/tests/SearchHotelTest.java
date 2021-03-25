@@ -1,9 +1,6 @@
 package com.travelers.tests;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.MediaEntityModelProvider;
-import com.travelers.helpers.SeleniumHelper;
 import com.travelers.helpers.TestListener;
 import com.travelers.pages.HomePage;
 import com.travelers.pages.ResultPage;
